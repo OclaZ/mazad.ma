@@ -1,0 +1,16 @@
+version: "4.33.1"
+services:
+  mazad-ma-db:
+    image: postgres
+    restart: always
+    container_name: mazad-ma-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: example
+      PG-DATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+
+volumes:
+  postgres:
