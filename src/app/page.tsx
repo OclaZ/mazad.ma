@@ -6,41 +6,20 @@ import { SignOut } from "@/components/ui/sign-out";
 import { database } from "@/db/database";
 import { items } from "@/db/schema";
 import { revalidatePath } from "next/cache";
-
 export default async function HomePage() {
-  const allItems = await database.select().from(items); // Fetch items from the database
+  const allItems = await database.query.items.findMany();
   const session = await auth();
-
-  if (!session || !session.user) return <SignIn />;
-
+  if (!session) return null;
+  if (!session.user) return null;
   return (
-    <main className="">
-      <SignOut />
-      <p>Welcome, {session?.user?.name}</p>
+    <main className="container mx-auto py-12 space-y-8">
+      <h1 className="text-4xl font-bold">Items For Sale</h1>
 
-      <form
-        action={async (formData: FormData) => {
-          "use server";
-          const name = formData.get("name");
-          if (!name) {
-            throw new Error("Name is required");
-          }
-
-          await database.insert(items).values({
-            name: name as string,
-            userId: session?.user?.id,
-          });
-
-          revalidatePath("/"); // Revalidate the path to show the new item
-        }}
-      >
-        <Input name="name" placeholder="Name your item" />
-        <Button type="submit">Post item</Button>
-      </form>
-
-      <div>
+      <div className="grid grid-cols-4 gap-4">
         {allItems.map((item) => (
-          <div key={item.id}>{item.name}</div>
+          <div className="border p-8 rounded-xl" key={item.id}>
+            {item.name}
+          </div>
         ))}
       </div>
     </main>
