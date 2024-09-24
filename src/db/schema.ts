@@ -96,4 +96,5 @@ export const items = pgTable("mm_item", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   name: text("name").notNull(),
+  startingPrice: integer("startingPrice").notNull(),
 });

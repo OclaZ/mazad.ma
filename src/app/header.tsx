@@ -12,16 +12,15 @@ export async function Header() {
     "
     >
       <div className="Container flex justify-between items-center">
-        <div>
+        <div className="flex items-center gap-12">
           <Link href={"/"} className="hover:underline flex items-center gap-1">
-            <Image src="/MAZAD-MA LOGO.svg" alt="logo" width={50} height={50} />
-            Mazad.ma
+            <Image src="/MAZAD-MA.svg" alt="logo" width={250} height={250} />
           </Link>
           <Link
             href={"/bids/create"}
             className="hover:underline flex items-center gap-1"
           >
-            Auction Items
+            Auction an Item
           </Link>
         </div>
         <div className="flex items-center gap-4">
