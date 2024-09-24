@@ -1,11 +1,5 @@
 import { auth } from "@/auth";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import SignIn from "@/components/ui/sign-in";
-import { SignOut } from "@/components/ui/sign-out";
 import { database } from "@/db/database";
-import { items } from "@/db/schema";
-import { revalidatePath } from "next/cache";
 export default async function HomePage() {
   const allItems = await database.query.items.findMany();
   const session = await auth();
